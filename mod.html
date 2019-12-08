@@ -1,0 +1,56 @@
+<table width="100%" cellpadding="5">
+    <tr>
+        <td class="c0"><label for="name"><?php echo get_string('fieldname', 'data'); ?></label></td>
+        <td class="c1"><input class="fieldname" type="text" name="name" id="name" value="<?php p($this->field->name); ?>" /></td>
+    </tr>
+    <tr>
+        <td class="c0"><label for="description"><?php echo get_string('fielddescription', 'data'); ?></label></td>
+        <td class="c1"><input class="fielddescription" type="text" name="description" id="description" value="<?php p($this->field->description); ?>" /></td>
+    </tr>
+    <tr>
+        <td class="c0">
+            <label for="frequency">
+                <?php echo get_string('frequency', 'datafield_notification'); ?>
+            </label>
+        </td>
+        <td class="c1">
+            <select name="options_frequency" id="frequency">
+                <option value="<?php echo DATAFIELD_NOTIFICATION_FREQUENCY_NONE; ?>"<?php if ($options->frequency == DATAFIELD_NOTIFICATION_FREQUENCY_NONE) { echo " selected"; } ?>><?php echo get_string('frequency_none', 'datafield_notification'); ?></option>
+                <option value="<?php echo DATAFIELD_NOTIFICATION_FREQUENCY_DAILY; ?>"<?php if ($options->frequency == DATAFIELD_NOTIFICATION_FREQUENCY_DAILY) { echo " selected"; } ?>><?php echo get_string('frequency_daily', 'datafield_notification'); ?></option>
+                <option value="<?php echo DATAFIELD_NOTIFICATION_FREQUENCY_WEEKDAYS; ?>"<?php if ($options->frequency == DATAFIELD_NOTIFICATION_FREQUENCY_WEEKDAYS) { echo " selected"; } ?>><?php echo get_string('frequency_weekdays', 'datafield_notification'); ?></option>
+                <option value="<?php echo DATAFIELD_NOTIFICATION_FREQUENCY_WEEKENDS; ?>"<?php if ($options->frequency == DATAFIELD_NOTIFICATION_FREQUENCY_WEEKENDS) { echo " selected"; } ?>><?php echo get_string('frequency_weekends', 'datafield_notification'); ?></option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="c0">
+            <label for="condition">
+                <?php echo get_string('condition', 'datafield_notification'); ?>
+            </label>
+        </td>
+        <td class="c1">
+            <select name="options_condition" id="condition">
+                <option value="<?php echo DATAFIELD_NOTIFICATION_CONDITION_NORECORD; ?>"<?php if ($options->condition == DATAFIELD_NOTIFICATION_CONDITION_NORECORD) { echo " selected"; } ?>><?php echo get_string('condition_norecord', 'datafield_notification'); ?></option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="c0" style="vertical-align: top;"><?php echo get_string('targets', 'datafield_notification'); ?></td>
+        <td class="c1"><?php echo datafield_notification_gettargetcheckboxes($users, $options->targets); ?></td>
+    </tr>
+    <tr>
+        <td class="c0">
+            <label for="datafield_notification-message"><?php echo get_string('message', 'datafield_notification'); ?></label>
+        </td>
+        <td class="c1">
+            <textarea id="datafield_notification-message" name="options_message" style="width: 100%; height: 20em;"><?php p($options->message); ?></textarea>
+            <div>
+                <strong><?php echo get_string('messagevariables', 'datafield_notification'); ?></strong><br>
+                <a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[targetfullname]]"><?php echo get_string('messagevariables_targetfullname', 'datafield_notification'); ?></a><br>
+                <a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[linktocourse]]"><?php echo get_string('messagevariables_linktocourse', 'datafield_notification'); ?></a><br>
+                <a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[linktomodule]]"><?php echo get_string('messagevariables_linktomodule', 'datafield_notification'); ?></a>
+            </div>
+        </td>
+    </tr>
+</table>
+<input type="hidden" name="required" value="0">
