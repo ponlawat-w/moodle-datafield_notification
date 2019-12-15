@@ -24,19 +24,6 @@
     </tr>
     <tr>
         <td class="c0">
-            <label for="datafield_notification-checktype">
-                <?php echo get_string('checktype', 'datafield_notification'); ?>
-            </label>
-        </td>
-        <td class="c1">
-            <select name="options_checktype" id="datafield_notification-checktype">
-                <option value="<?php echo DATAFIELD_NOTIFICATION_CHECKTYPE_ALL; ?>"<?php if ($options->checktype == DATAFIELD_NOTIFICATION_CHECKTYPE_ALL) { echo " selected"; } ?>><?php echo get_string('checktype_all', 'datafield_notification'); ?></option>
-                <option value="<?php echo DATAFIELD_NOTIFICATION_CHECKTYPE_DAY; ?>"<?php if ($options->checktype == DATAFIELD_NOTIFICATION_CHECKTYPE_DAY) { echo " selected"; } ?>><?php echo get_string('checktype_day', 'datafield_notification'); ?></option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td class="c0">
             <label for="datafield_notification-condition">
                 <?php echo get_string('condition', 'datafield_notification'); ?>
             </label>

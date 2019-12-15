@@ -13,9 +13,6 @@ const DATAFIELD_NOTIFICATION_FREQUENCY_WEEKENDS = 3;
 const DATAFIELD_NOTIFICATION_CONDITION_NORECORD = 1;
 const DATAFIELD_NOTIFICATION_CONDITION_EMPTYFIELD = 2;
 
-const DATAFIELD_NOTIFICATION_CHECKTYPE_ALL = 1;
-const DATAFIELD_NOTIFICATION_CHECKTYPE_DAY = 2;
-
 function datafield_notification_getoptions($field) {
     $options = json_decode($field->{DATAFIELD_NOTIFICATION_COLUMN_FIELD_OPTIONS});
     if (!$options) {
@@ -33,9 +30,6 @@ function datafield_notification_getoptions($field) {
     }
     if (!isset($options->condition)) {
         $options->condition = DATAFIELD_NOTIFICATION_CONDITION_NORECORD;
-    }
-    if (!isset($options->checktype)) {
-        $options->checktype = DATAFIELD_NOTIFICATION_CHECKTYPE_DAY;
     }
 
     return $options;
@@ -74,7 +68,6 @@ function datafield_notification_getoptionsfrompagerequest() {
     $options->message = isset($_REQUEST['options_message']) ? $_REQUEST['options_message'] : '';
     $options->targets = isset($_REQUEST['options_targets']) ? $_REQUEST['options_targets'] : [];
     $options->frequency = isset($_REQUEST['options_frequency']) ? $_REQUEST['options_frequency'] : DATAFIELD_NOTIFICATION_FREQUENCY_NONE;
-    $options->checktype = isset($_REQUEST['options_checktype']) ? $_REQUEST['options_checktype'] : DATAFIELD_NOTIFICATION_CHECKTYPE_DAY;
     $options->condition = isset($_REQUEST['options_condition']) ? $_REQUEST['options_condition'] : null;
 
     if ($options->condition == DATAFIELD_NOTIFICATION_CONDITION_EMPTYFIELD) {
@@ -173,7 +166,7 @@ function datafield_notification_cronnorecord($field, $options, $interval) {
     }
 
     $end = time();
-    $begin = $options->checktype == DATAFIELD_NOTIFICATION_CHECKTYPE_DAY ? $end - $interval : 0;
+    $begin = $end - $interval;
     foreach ($options->targets as $target) {
         $countrecord = $DB->get_record_sql(
             'SELECT COUNT(*) amount FROM {data_records} WHERE dataid = ? AND userid = ? AND timecreated BETWEEN ? AND ?'
@@ -194,7 +187,7 @@ function datafield_notification_cronemptyfield($field, $options, $interval) {
     }
 
     $end = time();
-    $begin = $options->checktype == DATAFIELD_NOTIFICATION_CHECKTYPE_DAY ? $end - $interval : 0;
+    $begin = $end - $interval;
 
     $ownershipsparams = [];
     for ($i = 0; $i < count($options->ownerships); $i++) {

@@ -23,10 +23,6 @@ $string['ownership'] = 'Entry Ownership';
 $string['ownership_description'] = 'Apply condition checking to those entries which were created by selected users.<br>'.
     'Checked user and notified user might be different.';
 
-$string['checktype'] = 'Condition Check Type ';
-$string['checktype_day'] = 'check only between time span of the execution day';
-$string['checktype_all'] = 'check for all the module regardless of execution day';
-
 $string['messagevariables'] = 'Dynamic Variables';
 $string['messagevariables_targetfullname'] = 'Target User\'s Full Name';
 $string['messagevariables_ownerfullname'] = 'Owner\'s Full Name';
