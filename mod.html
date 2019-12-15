@@ -24,19 +24,54 @@
     </tr>
     <tr>
         <td class="c0">
-            <label for="condition">
-                <?php echo get_string('condition', 'datafield_notification'); ?>
+            <label for="datafield_notification-checktype">
+                <?php echo get_string('checktype', 'datafield_notification'); ?>
             </label>
         </td>
         <td class="c1">
-            <select name="options_condition" id="condition">
-                <option value="<?php echo DATAFIELD_NOTIFICATION_CONDITION_NORECORD; ?>"<?php if ($options->condition == DATAFIELD_NOTIFICATION_CONDITION_NORECORD) { echo " selected"; } ?>><?php echo get_string('condition_norecord', 'datafield_notification'); ?></option>
+            <select name="options_checktype" id="datafield_notification-checktype">
+                <option value="<?php echo DATAFIELD_NOTIFICATION_CHECKTYPE_ALL; ?>"<?php if ($options->checktype == DATAFIELD_NOTIFICATION_CHECKTYPE_ALL) { echo " selected"; } ?>><?php echo get_string('checktype_all', 'datafield_notification'); ?></option>
+                <option value="<?php echo DATAFIELD_NOTIFICATION_CHECKTYPE_DAY; ?>"<?php if ($options->checktype == DATAFIELD_NOTIFICATION_CHECKTYPE_DAY) { echo " selected"; } ?>><?php echo get_string('checktype_day', 'datafield_notification'); ?></option>
             </select>
         </td>
     </tr>
     <tr>
+        <td class="c0">
+            <label for="datafield_notification-condition">
+                <?php echo get_string('condition', 'datafield_notification'); ?>
+            </label>
+        </td>
+        <td class="c1">
+            <select name="options_condition" id="datafield_notification-condition">
+                <option value="<?php echo DATAFIELD_NOTIFICATION_CONDITION_NORECORD; ?>"<?php if ($options->condition == DATAFIELD_NOTIFICATION_CONDITION_NORECORD) { echo " selected"; } ?>><?php echo get_string('condition_norecord', 'datafield_notification'); ?></option>
+                <option value="<?php echo DATAFIELD_NOTIFICATION_CONDITION_EMPTYFIELD; ?>"<?php if ($options->condition == DATAFIELD_NOTIFICATION_CONDITION_EMPTYFIELD) { echo " selected"; } ?>><?php echo get_string('condition_emptyfield', 'datafield_notification'); ?></option>
+            </select>
+        </td>
+    </tr>
+    <tr class="datafield_notification-condition-emptyfield">
+        <td class="c0">
+            <label for="datafield_notification-field">
+                <?php echo get_string('field', 'datafield_notification'); ?>
+            </label>
+        </td>
+        <td class="c1">
+            <?php echo datafield_notification_getfieldsdropdown($fields, $options, 'datafield_notification-field'); ?>
+        </td>
+    </tr>
+    <tr class="datafield_notification-condition-emptyfield">
+        <td class="c0" style="vertical-align: top;">
+            <?php echo get_string('ownership', 'datafield_notification'); ?>
+        </td>
+        <td class="c1">
+            <p class="small">
+                <?php echo get_string('ownership_description', 'datafield_notification'); ?>
+            </p>
+            <?php echo datafield_notification_getuserscheckboxes($users, $ownerships, 'options_ownerships[]'); ?>
+        </td>
+    </tr>
+    <tr>
         <td class="c0" style="vertical-align: top;"><?php echo get_string('targets', 'datafield_notification'); ?></td>
-        <td class="c1"><?php echo datafield_notification_gettargetcheckboxes($users, $options->targets); ?></td>
+        <td class="c1"><?php echo datafield_notification_getuserscheckboxes($users, $options->targets); ?></td>
     </tr>
     <tr>
         <td class="c0">
@@ -46,9 +81,11 @@
             <textarea id="datafield_notification-message" name="options_message" style="width: 100%; height: 20em;"><?php p($options->message); ?></textarea>
             <div>
                 <strong><?php echo get_string('messagevariables', 'datafield_notification'); ?></strong><br>
-                <a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[targetfullname]]"><?php echo get_string('messagevariables_targetfullname', 'datafield_notification'); ?></a><br>
-                <a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[linktocourse]]"><?php echo get_string('messagevariables_linktocourse', 'datafield_notification'); ?></a><br>
-                <a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[linktomodule]]"><?php echo get_string('messagevariables_linktomodule', 'datafield_notification'); ?></a>
+                <div><a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[targetfullname]]"><?php echo get_string('messagevariables_targetfullname', 'datafield_notification'); ?></a></div>
+                <div><a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[linktocourse]]"><?php echo get_string('messagevariables_linktocourse', 'datafield_notification'); ?></a></div>
+                <div><a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[linktomodule]]"><?php echo get_string('messagevariables_linktomodule', 'datafield_notification'); ?></a></div>
+                <div class="datafield_notification-condition-emptyfield"><a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[ownerfullname]]"><?php echo get_string('messagevariables_ownerfullname', 'datafield_notification'); ?></a></div>
+                <div class="datafield_notification-condition-emptyfield"><a href="javascript:void(0);" class="datafield_notification-messagevariables" data-value="[[linktoentry]]"><?php echo get_string('messagevariables_linktoentry', 'datafield_notification'); ?></a></div>
             </div>
         </td>
     </tr>

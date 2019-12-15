@@ -37,7 +37,7 @@ class data_field_notification extends data_field_base {
     }
 
     function display_edit_field() {
-        global $CFG, $OUTPUT, $COURSE, $PAGE;
+        global $CFG, $OUTPUT, $COURSE, $PAGE, $DB;
 
         $PAGE->requires->js(new moodle_url('/mod/data/field/notification/mod.js'));
 
@@ -48,7 +48,10 @@ class data_field_notification extends data_field_base {
             $users[$user->id] = fullname($user);
         }
 
+        $fields = datafield_notification_getotherfields($this->field->dataid);
+
         $options = datafield_notification_getoptions($this->field);
+        $ownerships = isset($options->ownerships) ? $options->ownerships : [];
 
         if (empty($this->field)) {   // No field has been defined yet, try and make one
             $this->define_default_field();

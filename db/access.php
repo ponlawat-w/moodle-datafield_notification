@@ -9,5 +9,12 @@ $capabilities = array(
         'archetypes' => array(
             'user' => CAP_ALLOW
         )
+    ),
+    'datafield/notification:emptyfieldnotification' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetype' => array(
+            'user' => CAP_ALLOW
+        )
     )
 );

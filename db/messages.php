@@ -10,5 +10,13 @@ $messageproviders = array(
             'email' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF,
             'anyotheroutput' => MESSAGE_PERMITTED
         )
+    ),
+    'emptyfieldnotification' => array(
+        'capability' => 'datafield/notification:emptyfieldnotification',
+        'defaults' => array(
+            'popup' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF,
+            'email' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF,
+            'anyotheroutput' => MESSAGE_PERMITTED
+        )
     )
 );
